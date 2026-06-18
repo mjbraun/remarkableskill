@@ -45,17 +45,27 @@ Run the conversion script:
 On success, confirm: "Uploaded **{name}.pdf** to Remarkable Inbox"
 
 On failure, report the error and suggest troubleshooting:
-- If rmapi fails: suggest running `rmapi` to re-authenticate
+- If rmapi fails with `cannot parse rootIndex, wrong schema got 4, expected: 3`: the
+  rmapi binary is too old for reMarkable's current cloud. Install rmapi >= v0.0.34
+  (see Dependencies) - the script prefers `~/.local/bin/rmapi` over the one on PATH.
+- If rmapi fails with an auth error: re-authenticate by running `~/.local/bin/rmapi`
+  and following the device registration flow.
 - If pandoc/weasyprint fails: check the markdown syntax
 
 ## Dependencies
 
 The user must have installed:
-- `rmapi` - `brew install io41/tap/rmapi`
+- `rmapi` **>= v0.0.34** (the maintained ddvk fork) at `~/.local/bin/rmapi`. reMarkable's
+  cloud migrated to sync schema v4; older builds (including Homebrew's io41/tap/rmapi
+  v0.0.29) can't parse it. Get the binary from
+  https://github.com/ddvk/rmapi/releases (download `rmapi-macos-arm64.zip`, unzip,
+  `chmod +x rmapi`, move to `~/.local/bin/rmapi`) or build from source
+  (`git clone https://github.com/ddvk/rmapi && cd rmapi && go build -o ~/.local/bin/rmapi .`).
 - `pandoc` - `brew install pandoc`
 - `weasyprint` - `pip install weasyprint`
 
-And authenticated rmapi by running `rmapi` and following the device registration flow.
+And authenticated rmapi by running `~/.local/bin/rmapi` once and following the device
+registration flow. Auth is stored at `~/Library/Application Support/rmapi/rmapi.conf` on macOS.
 
 ## Examples
 

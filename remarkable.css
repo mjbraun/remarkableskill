@@ -56,23 +56,38 @@ blockquote {
 code {
   font-family: "Courier New", Courier, monospace;
   font-size: 10pt;
-  background: #f0f0f0;
+  background: none;
   padding: 0.1em 0.3em;
+  border: 1px solid #000;
+  color: #000 !important;
 }
 
 pre {
   font-family: "Courier New", Courier, monospace;
   font-size: 10pt;
-  background: #f0f0f0;
+  background: none;
   padding: 1em;
   overflow-x: auto;
-  border: 1px solid #ccc;
+  border-left: 4px solid #000;
+  margin-left: 0.5em;
   page-break-inside: avoid;
+  color: #000 !important;
 }
 
 pre code {
   background: none;
+  border: none;
   padding: 0;
+  color: #000 !important;
+}
+
+/* Force all syntax highlighting spans to black */
+pre span, code span,
+pre .comment, pre .keyword, pre .string, pre .number,
+pre .function, pre .operator, pre .punctuation,
+code .comment, code .keyword, code .string, code .number,
+code .function, code .operator, code .punctuation {
+  color: #000 !important;
 }
 
 table {
@@ -89,7 +104,7 @@ th, td {
 }
 
 th {
-  background: #f0f0f0;
+  background: #d8d8d8;
   font-weight: bold;
 }
 
